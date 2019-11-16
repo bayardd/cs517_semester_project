@@ -18,24 +18,49 @@ def main():
     if(len(sys.argv) < 2):
         print("Usage: file must be provided")
         exit()
-
-    print(sys.argv)
     
     fileName = sys.argv[1]
     includes_units = sys.argv[2] == "yes"
 
+    if(len(sys.argv) == 4):
+        try:
+            num_cores = int(sys.argv[3])
+        
+        # Probably should add better error handling..
+        except Exception as inst:
+            print(inst)
+            exit()
+    else:
+        num_cores = 4
+    
     filePath = generateFilePath(fileName)
     isValidPath = checkValidFile(filePath)
+    
+    #Build to adapt to number of cores?
+    #Start with 1 for now...
+    # Need matrix with 2 rows and n columns (2 dimensional list)
+    matrices = {}
+    numRows = parsing.file_len(fileName)
+    numColumns = 2
 
+    for i in range(0, num_cores):
+        matrices["matrix{0}".format(i)] = [[0 for x in range(numColumns)] for x in range(numRows)]
+
+    # matrices is a dict containing String keys which match 2d lists, corresponding to the matrices for each core.
     if(isValidPath):
         with open(filePath, 'r') as temps_file:
             for temps_as_floats in parsing.parse_raw_temps(temps_file, units=includes_units):
-                print(temps_as_floats)
-    
+                
+                currentRow = int(temps_as_floats[0] / 30)
 
+                for i in range(0, num_cores):  
+                    matrices["matrix{0}".format(i)][currentRow][0] = temps_as_floats[0]
+                    matrices["matrix{0}".format(i)][currentRow][1] = temps_as_floats[1][i]
+                
+    # Matrices are being read from file. Need to finish matrix solver and calculate least squares approximation based on that.
+    # Then need to repeat the same for interpolation module.
+    # Also need to implement matrix solver.. 
     # xTranspose = matrix_op.transposeMatrix(x)
-
-   
     # result = matrix_op.multiply(xTranspose, x)
 
 

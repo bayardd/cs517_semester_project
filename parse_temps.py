@@ -12,6 +12,13 @@ represents one or more functions.
 from typing import (TextIO, Iterator, List, Tuple)
 
 
+def file_len(original_temps: TextIO):
+        with open(original_temps) as f:
+            for i, l in enumerate(f):
+                pass
+        return i + 1
+
+
 def parse_raw_temps(original_temps: TextIO,
                     step_size: int = 30,
                     units: bool = True) -> Iterator[Tuple[float, List[float]]]:
