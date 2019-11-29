@@ -20,7 +20,10 @@ def main():
         exit()
     
     fileName = sys.argv[1]
-    includes_units = sys.argv[2] == "yes"
+    includes_units = False
+
+    if(len(sys.argv) >= 3):
+        includes_units = sys.argv[2] == "yes"
 
     if(len(sys.argv) == 4):
         try:
@@ -31,6 +34,7 @@ def main():
             print(inst)
             exit()
     else:
+        #Default to 4 cores
         num_cores = 4
     
     filePath = generateFilePath(fileName)
@@ -43,6 +47,7 @@ def main():
     numRows = parsing.file_len(fileName)
     numColumns = 2
 
+    #Dictionary containing key for each core. eg. matrix0, matrix1, matrix2...
     for i in range(0, num_cores):
         matrices["matrix{0}".format(i)] = [[0 for x in range(numColumns)] for x in range(numRows)]
 
@@ -62,6 +67,14 @@ def main():
     # Also need to implement matrix solver.. 
     # xTranspose = matrix_op.transposeMatrix(x)
     # result = matrix_op.multiply(xTranspose, x)
+
+
+    # Put everything below in a loop
+    xMatrix = matrix_op.createXMatrix(matrices['matrix0'])
+    yMatrix = matrix_op.createYMatrix(matrices['matrix0'])
+
+    
+
 
 
 def checkValidFile(filePath):

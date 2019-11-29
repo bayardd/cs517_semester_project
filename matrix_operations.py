@@ -10,8 +10,6 @@ def multiply(lhs, rhs):
     rhsColumns = len(rhs[0])
 
     n = len(lhs[0])
-    print("iter")
-    print(n)
 
     for i in range(0, lhsRows):
         result.append([]);
@@ -43,4 +41,33 @@ def transposeMatrix(matrix):
     return result
 
 
-# multiply(0,0)
+def augmentMatrix(lhs, rhs):
+    pass
+
+def matrixSolver(matrix):
+    pass
+
+def createXMatrix(matrix):
+
+    xMatrix = []
+
+    for i in range(0, len(matrix)):  
+        new = []
+
+        new.append(1)
+        new.append(matrix[i][0])
+        xMatrix.append(new)
+
+    return xMatrix
+
+def createYMatrix(matrix):
+    yMatrix = []
+
+    for i in range(0, len(matrix)):
+        yMatrix.append(matrix[i][1])
+
+    return yMatrix
+
+def augmentMatrix(lhs, rhs):
+    pass
+
