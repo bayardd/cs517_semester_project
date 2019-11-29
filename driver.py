@@ -70,9 +70,23 @@ def main():
 
 
     # Put everything below in a loop
-    xMatrix = matrix_op.createXMatrix(matrices['matrix0'])
-    yMatrix = matrix_op.createYMatrix(matrices['matrix0'])
+    x = matrix_op.createXMatrix(matrices['matrix0'])
+    y = matrix_op.createYMatrix(matrices['matrix0'])
 
+    xT = matrix_op.transposeMatrix(x)
+    xTx = matrix_op.multiply(xT, x)
+    xTy = matrix_op.multiply(xT, y)
+
+    print("X Matrix: ")
+    print(x)
+    print("Y Matrix")
+    print(y)
+
+    print("x transposed by X")
+    print(xTx)
+
+    print("xTy")
+    print(xTy)
     
 
 

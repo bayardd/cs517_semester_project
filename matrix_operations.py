@@ -4,21 +4,35 @@ These operations include multiplying, transposing, and ... matrices
  """
 
 def multiply(lhs, rhs):
+
+    """
+    Take two matrices and multiply them
+
+    Args:
+        lhs - (List) representing the left matrix to multiply 
+        rhs - (List) representing the right matrix to multiply
+
+        Yields:
+            Result of multiplying the right matrix by the left matrix
+ 
+    """
+
     sum = 0
     result = []
     lhsRows = len(lhs)
     rhsColumns = len(rhs[0])
 
     n = len(lhs[0])
+    print("X TRANSPOSE ")
+    print(lhs)
 
     for i in range(0, lhsRows):
         result.append([]);
         for j in range(0, rhsColumns):
-            result[i].append([])
+            # result[i].append([])
             for k in range(0, n):
                 sum += lhs[i][k] * rhs[k][j]
-
-            result[i][j].append(sum)
+            result[i].append(sum)
             sum = 0
 
     return result
@@ -64,10 +78,9 @@ def createYMatrix(matrix):
     yMatrix = []
 
     for i in range(0, len(matrix)):
-        yMatrix.append(matrix[i][1])
+        new = []
+        new.append(matrix[i][1])
+        yMatrix.append(new)
 
     return yMatrix
-
-def augmentMatrix(lhs, rhs):
-    pass
 
