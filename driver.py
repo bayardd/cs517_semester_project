@@ -8,6 +8,7 @@ import sys
 import os
 import matrix_operations as matrix_op
 import parse_temps as parsing
+import linear_interpolation as linear_interp
 
 def main():
     """
@@ -27,7 +28,7 @@ def main():
 
     if(len(sys.argv) == 4):
         try:
-            num_cores = int(sys.argv[3])
+            numCores = int(sys.argv[3])
         
         # Probably should add better error handling..
         except Exception as inst:
@@ -35,7 +36,7 @@ def main():
             exit()
     else:
         #Default to 4 cores
-        num_cores = 4
+        numCores = 4
     
     filePath = generateFilePath(fileName)
     isValidPath = checkValidFile(filePath)
@@ -48,7 +49,7 @@ def main():
     numColumns = 2
 
     #Dictionary containing key for each core. eg. matrix0, matrix1, matrix2...
-    for i in range(0, num_cores):
+    for i in range(0, numCores):
         matrices["matrix{0}".format(i)] = [[0 for x in range(numColumns)] for x in range(numRows)]
 
     # matrices is a dict containing String keys which match 2d lists, corresponding to the matrices for each core.
@@ -58,7 +59,7 @@ def main():
                 
                 currentRow = int(temps_as_floats[0] / 30)
 
-                for i in range(0, num_cores):  
+                for i in range(0, numCores):  
                     matrices["matrix{0}".format(i)][currentRow][0] = temps_as_floats[0]
                     matrices["matrix{0}".format(i)][currentRow][1] = temps_as_floats[1][i]
                 
@@ -68,28 +69,38 @@ def main():
     # xTranspose = matrix_op.transposeMatrix(x)
     # result = matrix_op.multiply(xTranspose, x)
 
-
+    for i in range(0, 1):
     # Put everything below in a loop
-    x = matrix_op.createXMatrix(matrices['matrix0'])
-    y = matrix_op.createYMatrix(matrices['matrix0'])
+        # print(matrices["matrix{0}".format(i)])
+        x = matrix_op.createXMatrix(matrices["matrix{0}".format(i)])
+        y = matrix_op.createYMatrix(matrices["matrix{0}".format(i)])
 
-    xT = matrix_op.transposeMatrix(x)
-    xTx = matrix_op.multiply(xT, x)
-    xTy = matrix_op.multiply(xT, y)
+        
+        
 
-    print("X Matrix: ")
-    print(x)
-    print("Y Matrix")
-    print(y)
+        xT = matrix_op.transposeMatrix(x)
+        xTx = matrix_op.multiply(xT, x)
+        xTy = matrix_op.multiply(xT, y)
+        
+        augmentedMatrix = matrix_op.augmentMatrix(xTx, xTy)
+        
+        # print("X Matrix: ")
+        # print(x)
+        # print("Y Matrix")
+        # print(y)
 
-    print("x transposed by X")
-    print(xTx)
+        # print("x transposed by X")
+        # print(xTx)
 
-    print("xTy")
-    print(xTy)
+        # print("xTy")
+        # print(xTy)
+        
+        solvedMatrix = matrix_op.solveMatrix(augmentedMatrix)
+        
+        #Will need to write them to file as we calculate them in each iteration
+        
+        linear_interp.piece_wise_linear_interp(matrices["matrix{0}".format(i)])
     
-
-
 
 def checkValidFile(filePath):
     """
