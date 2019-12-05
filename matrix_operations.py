@@ -57,7 +57,15 @@ def transposeMatrix(matrix):
 def augmentMatrix(lhs, rhs):
 
     """
-    Placeholder
+    Take a lhs matrix and rhs vector and augment the lhs matrix with the rhs vector
+
+    Args:
+        lhs - (List) representing the matrix to append the vector to
+        rhs - (List) representing the vector to append to the lhs matrix
+
+    Yields:
+        Augmented Matrix
+
     """
 
     n = len(lhs)
@@ -69,6 +77,16 @@ def augmentMatrix(lhs, rhs):
 
 
 def solveMatrix(matrix):
+
+    """
+    Take an augmented matrix and solve the matrix using Guassian elimination
+
+    Args:
+        matrix - (List) representing the augmented matrix to solve
+
+    Yields:
+        Solution of linear equations
+    """
 
     n = len(matrix)
     
@@ -94,6 +112,10 @@ def solveMatrix(matrix):
 
 
 def createXMatrix(matrix):
+
+    """
+    
+    """
 
     xMatrix = []
 

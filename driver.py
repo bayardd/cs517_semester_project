@@ -61,13 +61,7 @@ def main():
 
                 for i in range(0, numCores):  
                     matrices["matrix{0}".format(i)][currentRow][0] = temps_as_floats[0]
-                    matrices["matrix{0}".format(i)][currentRow][1] = temps_as_floats[1][i]
-                
-    # Matrices are being read from file. Need to finish matrix solver and calculate least squares approximation based on that.
-    # Then need to repeat the same for interpolation module.
-    # Also need to implement matrix solver.. 
-    # xTranspose = matrix_op.transposeMatrix(x)
-    # result = matrix_op.multiply(xTranspose, x)
+                    matrices["matrix{0}".format(i)][currentRow][1] = temps_as_floats[1][i]    
 
     for i in range(0, 1):
     # Put everything below in a loop
