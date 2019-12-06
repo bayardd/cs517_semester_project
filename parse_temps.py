@@ -13,10 +13,10 @@ from typing import (TextIO, Iterator, List, Tuple)
 
 
 def file_len(original_temps: TextIO):
-        with open(original_temps) as f:
-            for i, l in enumerate(f):
-                pass
-        return i + 1
+    with open(original_temps) as f:
+        for i, l in enumerate(f):
+            pass
+    return i + 1
 
 
 def parse_raw_temps(original_temps: TextIO,
@@ -40,7 +40,7 @@ def parse_raw_temps(original_temps: TextIO,
 
     if units:
         for step, line in enumerate(original_temps):
-            yield (step * step_size), [float(entry[:-2]) for entry in line.split()]
+            yield (step * step_size), [float(entry[:-3]) for entry in line.split()]
     else:
         for step, line in enumerate(original_temps):
             yield (step * step_size), [float(entry) for entry in line.split()]

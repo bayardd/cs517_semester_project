@@ -1,7 +1,9 @@
 """
 This module is a collection of functions which assist in matrix operations. 
-These operations include multiplying, transposing, and ... matrices
+These operations include setting up matrices, augmenting matrices, multiplying matrices,
+as well as solving augmented matrices.
  """
+NEWLINE = '\n'
 
 def multiply(lhs, rhs):
 
@@ -111,41 +113,66 @@ def solveMatrix(matrix):
         # print(matrix)
 
 
-def createXMatrix(matrix):
+def createXMatrix(listPoints):
 
     """
-    
-    """
+    Take list of points representing the x axis and create the corresponding x matrix
+
+    Args:
+        listPoints - (List) representing the x coordinates
+
+    Yields: 
+        X matrix
+    """ 
 
     xMatrix = []
 
-    for i in range(0, len(matrix)):  
+    for i in range(0, len(listPoints)):  
         new = []
 
         new.append(1)
-        new.append(matrix[i][0])
+        new.append(listPoints[i][0])
         xMatrix.append(new)
 
     return xMatrix
 
 
-def createYMatrix(matrix):
+def createYMatrix(listPoints):
+
+    """
+    Take list of points representing the y axis and create the corresponding y matrix
+
+    Args:
+        listPoints - (List) representing the y coordinates
+
+    Yields: 
+        Y matrix
+    """
+
     yMatrix = []
 
-    for i in range(0, len(matrix)):
+    for i in range(0, len(listPoints)):
         new = []
-        new.append(matrix[i][1])
+        new.append(listPoints[i][1])
         yMatrix.append(new)
 
     return yMatrix
 
 
 def findLargestRowByColumn(matrix, startingCol, numRows):
+    
     """
+    Find largest row by column index and return it
+
+    Args:
+        matrix - (List) representing the augmented matrix
+        startingCol - (int) containing the column to start searching from
+        numRows - (int) containing the number of rows
 
     Yields:
         index of largest element in matrix
     """
+
     maxIndex = startingCol
     startingMax = matrix[startingCol][startingCol]
    
@@ -160,7 +187,18 @@ def findLargestRowByColumn(matrix, startingCol, numRows):
 
 def swap_row(matrix, currentRow, rowToSwap):
     
-    #Switch currentRow with rowToSwap (both are indexes)
+    """
+    Swap two rows within the passed matrix
+
+    Args:
+        matrix - (List) representing the augmented matrix
+        currentRow - (int) containing the row index to switch
+        rowToSwap - (int) containing the other row index to switch
+
+    Yields:
+        matrix with rows currentRow and rowToSwap swapped
+    """
+    
     temp = matrix[currentRow]
     matrix[currentRow] = matrix[rowToSwap]
     matrix[rowToSwap] = temp;
@@ -172,6 +210,19 @@ def scale(matrix, currentRow, numColumns, scalar):
         matrix[currentRow][j] = matrix[currentRow][j] / scalar
 
 def eliminate(matrix, startRow, numColumns, numRows):
+    
+    """
+    Perform subtraction operations on the selected matrix rows
+
+    Args:
+        matrix - (List) representing the augmented matrix
+        startRow - (int) containing the row to start the elimination from
+        numColumns - (int) containing the number of columns which will be eliminated in each row
+        numRows - (int) containing the maximum number of rows
+
+    Yields:
+        matrix with startRow values eliminated through numColumns
+    """
 
     # print("Should be sorted")
     # print(matrix)
@@ -191,7 +242,17 @@ def eliminate(matrix, startRow, numColumns, numRows):
   
 
 def backSolve(matrix):
-    
+
+    """
+    Iterate through each row starting from the end and backsolve above the identify matrix.
+
+    Args:
+        matrix - (List) representing the augmented matrix
+        
+    Yields:
+        solved matrix
+    """
+
     augColumnId = len(matrix)
     lastRow = len(matrix) - 1
 
@@ -215,3 +276,20 @@ def backSolve(matrix):
     # print(matrix)
 
     return matrix
+
+
+def writeToFile(solvedMatrix, fileStream, maxTime):
+
+    """
+    Write solution to matrix to file
+
+    Args:
+        solvedMatrix (List) representing the solved matrix.
+
+    Yields:
+        file containing the global least squares approximation
+    """
+    c0 = round(solvedMatrix[0][2],6)
+    c1 = round(solvedMatrix[1][2], 6)
+
+    fileStream.write(f'0 <= x < {maxTime}; y = {c0} + {c1}x; least-squares {NEWLINE}{NEWLINE}')
