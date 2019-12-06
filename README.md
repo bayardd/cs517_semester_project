@@ -21,3 +21,7 @@ Required:
 ## Output
 The program will output 4 text files by default, representing each individual core. These files will include the global least squares approximation as well as
 the system of linear equations. These files are overridden each time the program is run, removing the previous results.
+
+# Documentation
+Documentation is done through Pydoc. In order to view the documentation, run the below command:  
+&nbsp;&nbsp;&nbsp;&nbsp; pydoc3.7 [filename]
