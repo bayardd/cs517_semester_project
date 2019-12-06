@@ -72,23 +72,9 @@ def main():
         xT = matrix_op.transposeMatrix(x)
         xTx = matrix_op.multiply(xT, x)
         xTy = matrix_op.multiply(xT, y)
+
         augmentedMatrix = matrix_op.augmentMatrix(xTx, xTy)
-        
-        # print("X Matrix: ")
-        # print(x)
-        # print("Y Matrix")
-        # print(y)
-
-        # print("x transposed by X")
-        # print(xTx)
-
-        # print("xTy")
-        # print(xTy)
-        
-        solvedMatrix = matrix_op.solveMatrix(augmentedMatrix)
-
-        # print(solvedMatrix)
-            
+        solvedMatrix = matrix_op.solveMatrix(augmentedMatrix)            
         linearEquations = linearInterp.pieceWiseLinearInterp(matrices["matrix{0}".format(i)])
 
 
@@ -103,10 +89,6 @@ def main():
         matrix_op.writeToFile(solvedMatrix, f, maxTime)
         linearInterp.writeToFile(linearEquations, f)
 
-
-
-        
-    
 
 def checkValidFile(filePath):
     

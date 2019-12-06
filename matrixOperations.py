@@ -95,7 +95,7 @@ def solveMatrix(matrix):
     #As the matrix is augmented, number of colums will be greater by 1
     numColumns = len(matrix[0])
 
-    for i in range(0, n):
+    for i in range(0, n):   
         maxIndex = findLargestRowByColumn(matrix, i, n)
 
         #Swap row
@@ -206,7 +206,7 @@ def swap_row(matrix, currentRow, rowToSwap):
 
 def scale(matrix, currentRow, numColumns, scalar):
     
-    for j in range(0, numColumns):
+    for j in range(currentRow, numColumns):
         matrix[currentRow][j] = matrix[currentRow][j] / scalar
 
 def eliminate(matrix, startRow, numColumns, numRows):

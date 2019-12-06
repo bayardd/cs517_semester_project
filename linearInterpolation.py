@@ -61,10 +61,8 @@ def pieceWiseLinearInterp(matrix):
         y1 = matrix[i + 1][1]
 
         slope = calculateSlope(y0, y1)
-
         yIntercept = calculateYIntercept(x, y0, slope)
-        
-        # print("Y = " + str(yIntercept) + " + " + str(slope) + "x")
+
         yInterceptSlopePair = (x, yIntercept, slope)
         linearEquations.append(yInterceptSlopePair)
     
