@@ -3,7 +3,6 @@
 """
 Main driver for this program. Responsible for taking command line arguments and initiating the program.
 If the file provided as an command line argument is invalid this function will quit with an exception.
-*** needs more details *** 
 """
 
 import sys

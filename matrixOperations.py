@@ -109,9 +109,6 @@ def solveMatrix(matrix):
 
     return backSolve(matrix)
 
-        # print("After Swap and scaling and eliminating")
-        # print(matrix)
-
 
 def createXMatrix(listPoints):
 
@@ -224,13 +221,7 @@ def eliminate(matrix, startRow, numColumns, numRows):
         matrix with startRow values eliminated through numColumns
     """
 
-    # print("Should be sorted")
-    # print(matrix)
     startingCol = startRow
-
-    # print("starting row " + str(startRow))
-    # print("Starting column " + str(startingCol))
-    # print("Number of rows " + str(numRows))
 
     for i in range(startRow + 1, numRows):
 
@@ -256,24 +247,14 @@ def backSolve(matrix):
     augColumnId = len(matrix)
     lastRow = len(matrix) - 1
 
-    # print(matrix)
-    # print("Last row " + str(lastRow))
 
     for i in range(lastRow, 0, -1):
-        # print("i " + str(i))
-        # print("Enter for loop")
-        # print("i - 1 " + str(i - 1))
         for j in range(i - 1, -1, -1):
-            # print("j is " + str(j))
+          
             s = matrix[j][i]
-
-            # print("s is " + str(s))
-            # print("augmented id " + str(augColumnId))
 
             matrix[j][i] = matrix[j][i] - (s * matrix[i][i])
             matrix[j][augColumnId] = matrix[j][augColumnId] - (s * matrix[i][augColumnId])
-    # print("Done")
-    # print(matrix)
 
     return matrix
 
